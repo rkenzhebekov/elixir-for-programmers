@@ -2,6 +2,10 @@ defmodule Hangman do
 
   def new_game() do
     { :ok, pid } = Supervisor.start_child(Hangman.Supervisor, [])
+
+    Hangman.StatAgent.increment()
+    Hangman.StatAgent.count() |> IO.puts
+
     pid
   end
 

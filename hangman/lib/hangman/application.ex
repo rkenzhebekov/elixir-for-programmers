@@ -6,11 +6,12 @@ defmodule Hangman.Application do
 
     children = [
       worker(Hangman.Server, []),
+      worker(Hangman.StatAgent, []),
     ]
 
     options = [
       name: Hangman.Supervisor,
-      strategy: :simple_one_for_one,
+      strategy: :one_for_one,
     ]
 
     Supervisor.start_link(children, options)
